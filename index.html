@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PyNova AI — Premium Python Learning Universe</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Space Ambient Background -->
+  <div class="space-bg"></div>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="logo-container">
+        <div class="logo-icon">P</div>
+        <div class="logo-text">PyNova AI</div>
+      </div>
+      
+      <nav class="nav-menu">
+        <a href="#dashboard" class="nav-item active" data-target="dashboard-view">
+          <i class="fa-solid fa-square-poll-vertical"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#roadmap" class="nav-item" data-target="roadmap-view">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>Roadmap</span>
+        </a>
+        <a href="#teacher" class="nav-item" data-target="teacher-view">
+          <i class="fa-solid fa-robot"></i>
+          <span>AI Teacher</span>
+        </a>
+        <a href="#editor" class="nav-item" data-target="editor-view">
+          <i class="fa-solid fa-code"></i>
+          <span>Live Editor</span>
+        </a>
+        <a href="#practice" class="nav-item" data-target="practice-view">
+          <i class="fa-solid fa-gamepad"></i>
+          <span>Practice Arena</span>
+        </a>
+        <a href="#quiz" class="nav-item" data-target="quiz-view">
+          <i class="fa-solid fa-brain"></i>
+          <span>Quiz Center</span>
+        </a>
+        <a href="#debugger" class="nav-item" data-target="debugger-view">
+          <i class="fa-solid fa-bug"></i>
+          <span>AI Debug Lab</span>
+        </a>
+        <a href="#projects" class="nav-item" data-target="projects-view">
+          <i class="fa-solid fa-diagram-project"></i>
+          <span>Project Lab</span>
+        </a>
+        <a href="#leaderboard" class="nav-item" data-target="leaderboard-view">
+          <i class="fa-solid fa-trophy"></i>
+          <span>Leaderboard</span>
+        </a>
+        <a href="#profile" class="nav-item" data-target="profile-view">
+          <i class="fa-solid fa-user-astronaut"></i>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+      <!-- User Profile Summary & Mode toggling -->
+      <div class="user-profile-summary">
+        <div class="avatar-circle" id="sidebar-avatar">🤖</div>
+        <div class="profile-meta">
+          <div class="profile-name" id="sidebar-username">NovaCoder</div>
+          <div class="profile-sub" id="sidebar-level">Level 1 Pythonist</div>
+        </div>
+        <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Light/Dark Mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Section -->
+    <main class="main-content">
+      
+      <!-- Top header bar -->
+      <header class="top-header">
+        <button class="menu-toggle-btn" id="sidebar-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        
+        <h2>PyNova Dashboard</h2>
+
+        <div class="header-stats">
+          <div class="stat-pill xp" title="Total Experience Points">
+            <i class="fa-solid fa-bolt"></i>
+            <span id="header-xp">0 XP</span>
+          </div>
+          <div class="stat-pill streak" title="Daily Learning Streak">
+            <i class="fa-solid fa-fire"></i>
+            <span id="header-streak">1 Day</span>
+          </div>
+          <div class="stat-pill level" title="Current Level">
+            <i class="fa-solid fa-award"></i>
+            <span id="header-level">Lvl 1</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dynamic View Panels -->
+      
+      <!-- 1. DASHBOARD VIEW -->
+      <section id="dashboard-view" class="view-panel active">
+        <!-- Hero Section -->
+        <div class="hero-section">
+          <div class="hero-glowing-blob"></div>
+          <h1 class="hero-title">Learn Python.<br><span class="text-gradient-cyan">Build Anything.</span> <span class="text-gradient-violet">Powered by AI.</span></h1>
+          <p class="hero-subtitle">Your personal AI Python teacher that teaches, challenges, guides, and grows with you from hello-world to ML algorithms.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary" id="hero-learn-btn">Start Learning 🚀</button>
+            <button class="btn btn-secondary" id="hero-teacher-btn">Ask AI Teacher 🤖</button>
+          </div>
+          
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-num">35+</div>
+              <div class="stat-label">Lessons</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">50+</div>
+              <div class="stat-label">Challenges</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">20+</div>
+              <div class="stat-label">Quizzes</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">15+</div>
+              <div class="stat-label">Projects</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <!-- Left Column -->
+          <div class="dash-column">
+            <!-- Continue Learning Card -->
+            <div class="dashboard-card gradient-border">
+              <div class="card-header">
+                <h3 class="card-title">Continue Learning</h3>
+                <i class="fa-solid fa-play card-icon"></i>
+              </div>
+              <div class="continue-widget" id="continue-learning-widget">
+                <div class="lesson-node-icon"><i class="fa-brands fa-python"></i></div>
+                <div class="continue-details">
+                  <h4 class="continue-title" id="continue-lesson-title">Introduction to Python</h4>
+                  <div class="continue-desc">Foundations - Level 1</div>
+                </div>
+                <button class="btn btn-primary" id="continue-lesson-btn" style="padding: 8px 16px;">Resume</button>
+              </div>
+            </div>
+
+            <!-- Recommended Actions -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h3 class="card-title">AI Personalized Recommendations</h3>
+                <i class="fa-solid fa-sparkles card-icon" style="color: var(--accent-violet)"></i>
+              </div>
+              <div id="ai-recommendations-container" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Dynamically populated recommendation cards -->
+              </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h3 class="card-title">Your Recent Activity</h3>
+                <i class="fa-solid fa-history card-icon"></i>
+              </div>
+              <ul class="activity-list" id="activity-log-container">
+                <!-- Dynamically Populated activities -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="dash-column">
+            <!-- Level Progression details -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h3 class="card-title">Level Progression</h3>
+                <i class="fa-solid fa-ranking-star card-icon"></i>
+              </div>
+              <div style="margin-bottom: 12px; display: flex; justify-content: space-between; font-weight: 600;">
+                <span id="dash-level-text">Level 1</span>
+                <span id="dash-xp-details">0 / 100 XP</span>
+              </div>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar-fill" id="dash-xp-progress-bar" style="width: 0%"></div>
+              </div>
+              <div style="font-size: 13px; color: var(--text-secondary); margin-top: 10px; line-height: 1.4;">
+                Earn XP by completing roadmap nodes, solving code challenges, and scoring high on quizzes!
+              </div>
+            </div>
+
+            <!-- XP SVG Graph chart -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h3 class="card-title">Weekly XP Activity</h3>
+                <i class="fa-solid fa-chart-line card-icon"></i>
+              </div>
+              <div class="progress-chart-container" id="xp-weekly-chart">
+                <!-- Dynamic SVG Bars populated via js -->
+              </div>
+            </div>
+
+            <!-- Weak Topics -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h3 class="card-title">Topics to Improve</h3>
+                <i class="fa-solid fa-circle-exclamation card-icon"></i>
+              </div>
+              <div id="weak-topics-container">
+                <span class="topic-tag">None yet! Keep studying. 🌟</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ROADMAP VIEW -->
+      <section id="roadmap-view" class="view-panel">
+        <h2 style="font-size: 28px; margin-bottom: 8px;">Learning Path Roadmap</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 40px;">Follow this connected structured path to master Python step-by-step. Completing lessons unlocks subsequent nodes.</p>
+        
+        <div class="roadmap-container" id="roadmap-tree">
+          <!-- Roadmap Level Blocks dynamically generated from Database -->
+        </div>
+      </section>
+
+      <!-- 3. AI TEACHER VIEW -->
+      <section id="teacher-view" class="view-panel">
+        <div class="chat-container">
+          <!-- Chat sidebar histories -->
+          <div class="chat-history-sidebar">
+            <button class="btn btn-primary" id="new-chat-btn" style="width: 100%; font-size: 13px; padding: 10px;">
+              <i class="fa-solid fa-plus"></i> New Session
+            </button>
+            <h4 style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin-top: 16px;">Past Chats</h4>
+            <div class="chat-history-list" id="chat-sessions-list">
+              <!-- Dynamically populated histories -->
+            </div>
+          </div>
+
+          <!-- Main chat dialog screen -->
+          <div class="chat-main-area">
+            <div class="chat-header-bar">
+              <div class="avatar-circle" style="width: 38px; height: 38px; font-size: 18px;">🤖</div>
+              <div style="flex-grow: 1;">
+                <h4 style="font-size: 15px;">Nova AI Teacher</h4>
+                <span style="font-size: 11px; color: var(--text-secondary); display: flex; align-items: center; gap: 4px;">
+                  <span class="teacher-status-dot"></span> Active Assistant
+                </span>
+              </div>
+              <div class="ai-floating-mascot" style="position: static; width:34px; height: 34px; font-size:18px;">🤖</div>
+            </div>
+
+            <!-- Scrollable chat items -->
+            <div class="chat-messages" id="chat-messages-container">
+              <!-- Message bubbles -->
+            </div>
+
+            <!-- Fast quick prompts -->
+            <div class="quick-actions-bar" id="chat-quick-actions">
+              <button class="quick-btn" data-prompt="Explain loops simply">Explain Loops 🌀</button>
+              <button class="quick-btn" data-prompt="Give me a simple Python example">Give example 💡</button>
+              <button class="quick-btn" data-prompt="Quiz me on basic variables">Quiz me 🧠</button>
+              <button class="quick-btn" data-prompt="Explain like I'm a beginner: print()">Explain print() 📝</button>
+              <button class="quick-btn" data-prompt="Give me a coding challenge to solve">Give Challenge 🚀</button>
+            </div>
+
+            <!-- Keyboard text submissions -->
+            <div class="chat-input-area">
+              <div class="chat-input-wrapper">
+                <input type="text" class="chat-input" id="chat-input-box" placeholder="Ask Nova AI anything about Python...">
+              </div>
+              <button class="chat-send-btn" id="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. INTERACTIVE LESSON PANEL -->
+      <section id="lessons-view" class="view-panel">
+        <div class="lesson-layout">
+          <!-- Explanatory content -->
+          <div class="lesson-content-panel" id="lesson-details-panel">
+            <!-- Dynamic Content loaded from RoadMap data -->
+          </div>
+
+          <!-- Dynamic Sandbox and code testing checks -->
+          <div class="lesson-interactive-panel">
+            <!-- Quick Quiz Checking -->
+            <div class="lesson-quiz-card" id="lesson-quiz-container">
+              <!-- Populated Quiz components -->
+            </div>
+
+            <!-- Lesson Practice Challenge -->
+            <div class="lesson-practice-card" id="lesson-practice-container">
+              <h3 style="font-size: 18px; margin-bottom: 12px;">Lesson Challenge</h3>
+              <div id="lesson-challenge-prompt" style="font-size: 14px; margin-bottom: 12px; color: var(--text-secondary);">
+                <!-- Problem prompt details -->
+              </div>
+              <!-- Code Editor Wrapper -->
+              <div style="height: 320px; margin-bottom: 12px;">
+                <div class="editor-card">
+                  <div class="editor-header">
+                    <span class="editor-title"><i class="fa-solid fa-code"></i> Python Workspace</span>
+                    <div class="editor-actions">
+                      <button class="editor-btn" id="lesson-reset-code-btn">Reset</button>
+                      <button class="editor-btn run" id="lesson-run-code-btn">Run Code</button>
+                    </div>
+                  </div>
+                  <div class="editor-body">
+                    <div class="line-numbers" id="lesson-line-numbers">1</div>
+                    <textarea class="code-textarea" id="lesson-code-editor" spellcheck="false"></textarea>
+                  </div>
+                  <div class="editor-footer-panels">
+                    <div class="console-panel">
+                      <div class="panel-header">Console Terminal</div>
+                      <div class="console-log" id="lesson-console-output">> Waiting for code execution...</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI Hint drawer & Completion trigger -->
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button class="btn btn-secondary" id="lesson-hint-btn" style="padding: 10px 18px;"><i class="fa-solid fa-lightbulb"></i> Get AI Hint</button>
+                <button class="btn btn-primary" id="lesson-submit-btn" style="padding: 12px 24px;">Complete Lesson & Unlock Next 🔓</button>
+              </div>
+
+              <!-- AI Suggestion error log -->
+              <div class="ai-suggestion-box" id="lesson-error-suggestion">
+                <div class="ai-suggestion-title"><i class="fa-solid fa-sparkles"></i> Nova AI Code Coach</div>
+                <div id="lesson-error-suggestion-text" style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. LIVE CODE EDITOR -->
+      <section id="editor-view" class="view-panel" style="height: calc(100vh - 100px);">
+        <h2 style="font-size: 24px; margin-bottom: 8px;">Python Code Sandbox</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 20px;">A full interactive sandbox to experiment, code, test syntax, and use AI features.</p>
+        
+        <div style="display: grid; grid-template-columns: 3fr 1.2fr; gap: 24px; flex-grow: 1; height: 80%;">
+          <!-- Code editor area -->
+          <div class="editor-card">
+            <div class="editor-header">
+              <span class="editor-title"><i class="fa-solid fa-terminal"></i> sandbox.py</span>
+              <div class="editor-actions">
+                <button class="editor-btn" id="sandbox-clear-btn">Clear</button>
+                <button class="editor-btn" id="sandbox-reset-btn">Reset</button>
+                <button class="editor-btn run" id="sandbox-run-btn"><i class="fa-solid fa-play"></i> Run Code</button>
+              </div>
+            </div>
+            <div class="editor-body">
+              <div class="line-numbers" id="sandbox-line-numbers">1</div>
+              <textarea class="code-textarea" id="sandbox-code-editor" spellcheck="false"># Dynamic Python Playground
+print("Welcome to PyNova Live Editor!")
+
+# Assign variables
+name = "Galaxy Explorer"
+version = 2.0
+print(f"Project: {name} v{version}")
+</textarea>
+            </div>
+            <div class="editor-footer-panels">
+              <div class="console-panel" style="height: 150px;">
+                <div class="panel-header">Console Output</div>
+                <div class="console-log" id="sandbox-console-log">> Waiting for code...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Tools pane -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="dashboard-card" style="flex-grow: 1; display: flex; flex-direction: column; gap: 12px; padding: 20px;">
+              <h3 style="font-size: 16px; margin-bottom: 8px;"><i class="fa-solid fa-sparkles" style="color:var(--accent-cyan)"></i> Nova AI Editor Assistant</h3>
+              
+              <button class="btn btn-secondary" id="ai-tool-explain" style="justify-content: flex-start; text-align: left; font-size: 13px; padding: 12px;">
+                <i class="fa-solid fa-book-open"></i> Explain Code
+              </button>
+              <button class="btn btn-secondary" id="ai-tool-debug" style="justify-content: flex-start; text-align: left; font-size: 13px; padding: 12px;">
+                <i class="fa-solid fa-bug"></i> Debug Code
+              </button>
+              <button class="btn btn-secondary" id="ai-tool-optimize" style="justify-content: flex-start; text-align: left; font-size: 13px; padding: 12px;">
+                <i class="fa-solid fa-gauge-high"></i> Optimize Code
+              </button>
+              <button class="btn btn-secondary" id="ai-tool-tests" style="justify-content: flex-start; text-align: left; font-size: 13px; padding: 12px;">
+                <i class="fa-solid fa-vial"></i> Generate Test Cases
+              </button>
+
+              <div id="editor-ai-explanation-drawer" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 12px; font-size: 13px; color: var(--text-secondary); overflow-y: auto; max-height: 250px; line-height: 1.5;">
+                Select a tool above to analyze your sandbox code. Nova AI will print code walkthroughs and debugging analysis here.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. PRACTICE ARENA VIEW -->
+      <section id="practice-view" class="view-panel">
+        <div class="arena-header-bar">
+          <div>
+            <h2 style="font-size: 28px; margin-bottom: 6px;">Coding Practice Arena</h2>
+            <p style="color: var(--text-secondary);">Test your coding skills with structured code puzzles.</p>
+          </div>
+          <div class="difficulty-filters">
+            <button class="filter-pill active" data-difficulty="all">All Puzzles</button>
+            <button class="filter-pill" data-difficulty="beginner">Beginner</button>
+            <button class="filter-pill" data-difficulty="intermediate">Intermediate</button>
+          </div>
+        </div>
+
+        <!-- Practice Challenge list grid -->
+        <div class="challenges-list-grid" id="arena-challenges-grid">
+          <!-- Dynamic challenges mapping -->
+        </div>
+      </section>
+
+      <!-- 7. QUIZ CENTER VIEW -->
+      <section id="quiz-view" class="view-panel">
+        <h2 style="font-size: 28px; margin-bottom: 6px;">AI Quiz Center</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 32px;">Validate your concept mastery with interactive checkpoints.</p>
+
+        <div class="quiz-grid" id="quiz-main-container">
+          <!-- Dashboard listings -->
+          <div class="dash-column" id="quiz-dashboard-column" style="grid-column: 1 / -1;">
+            <div class="challenges-list-grid" id="quiz-list-grid">
+              <!-- Loaded from DB -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. PYTHON DEBUGGER LAB -->
+      <section id="debugger-view" class="view-panel">
+        <h2 style="font-size: 28px; margin-bottom: 6px;">AI Debug Lab</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 30px;">Paste code to detect errors, explain structural warnings, and review step-by-step variables mapping.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <!-- Left code workspace -->
+          <div class="editor-card" style="height: 480px;">
+            <div class="editor-header">
+              <span class="editor-title"><i class="fa-solid fa-code"></i> Paste Broken Code</span>
+              <button class="editor-btn run" id="debugger-analyze-btn">Analyze Code 🧠</button>
+            </div>
+            <div class="editor-body">
+              <div class="line-numbers" id="debugger-line-numbers">1</div>
+              <textarea class="code-textarea" id="debugger-code-editor" spellcheck="false" placeholder="# Paste your buggy code here
+total = 0
+for i in range(1, 4)
+total = total + i
+print(total)"></textarea>
+            </div>
+            <div class="editor-footer-panels">
+              <div class="console-panel" style="min-height: 100px;">
+                <div class="panel-header">Terminal Status</div>
+                <div class="console-log" id="debugger-console">> Ready to analyze code...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: AI Explanation -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="dashboard-card" style="flex-grow: 1; padding: 24px; max-height: 480px; overflow-y: auto;">
+              <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--accent-red)"><i class="fa-solid fa-circle-exclamation"></i> AI Diagnostic Report</h3>
+              
+              <div id="debugger-report-container" style="font-size: 14px; color: var(--text-secondary); line-height: 1.5; display: flex; flex-direction: column; gap: 12px;">
+                <p>Paste your Python snippet in the editor and click "Analyze Code".</p>
+                <p>Nova AI will scanning for syntax errors, logical gaps, division exceptions, and visualizes executions details.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step execution visualizer -->
+        <div class="debug-visualizer-container" id="debugger-visualizer" style="display: none;">
+          <h3 style="font-size: 16px;"><i class="fa-solid fa-shoe-prints" style="color:var(--accent-cyan)"></i> Step-by-Step Execution Visualizer</h3>
+          <p style="font-size: 13px; color: var(--text-secondary);">Click on the steps to simulate how Python reads your loop and updates variables in real-time.</p>
+          
+          <div class="debugger-steps-row" id="debugger-steps-row">
+            <!-- Step dots -->
+          </div>
+
+          <div class="debugger-viz-area" id="debugger-viz-area">
+            <!-- Render visual segments -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. PROJECT LAB VIEW -->
+      <section id="projects-view" class="view-panel">
+        <h2 style="font-size: 28px; margin-bottom: 6px;">Project Lab</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 30px;">Build real projects to synthesize your conceptual skills. Use the AI Mentor to guide your planning.</p>
+        
+        <!-- Project list grid -->
+        <div class="challenges-list-grid" id="project-list-grid">
+          <!-- Dynamically populated projects list -->
+        </div>
+
+        <!-- Project workspace window (Initially hidden) -->
+        <div id="project-workspace" style="display: none; grid-template-columns: 1.5fr 1fr; gap: 24px; margin-top: 20px;">
+          <!-- Coding section -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="dashboard-card">
+              <h3 style="font-size: 18px; margin-bottom: 10px;" id="project-workspace-title">Calculator</h3>
+              <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;" id="project-workspace-desc">Simple text calculator.</p>
+              
+              <h4 style="font-size: 13px; margin-bottom: 12px; text-transform: uppercase; color: var(--text-muted);">Step-by-step Tasks</h4>
+              <div class="project-tasks-list" id="project-workspace-tasks">
+                <!-- Checkboxes checklist -->
+              </div>
+            </div>
+
+            <!-- Mini code editor -->
+            <div style="height: 350px;">
+              <div class="editor-card">
+                <div class="editor-header">
+                  <span class="editor-title"><i class="fa-solid fa-code"></i> project.py</span>
+                  <div class="editor-actions">
+                    <button class="editor-btn" id="project-reset-btn">Reset</button>
+                    <button class="editor-btn run" id="project-run-btn">Run Code</button>
+                  </div>
+                </div>
+                <div class="editor-body">
+                  <div class="line-numbers" id="project-line-numbers">1</div>
+                  <textarea class="code-textarea" id="project-code-editor" spellcheck="false"></textarea>
+                </div>
+                <div class="editor-footer-panels">
+                  <div class="console-panel">
+                    <div class="panel-header">Console Output</div>
+                    <div class="console-log" id="project-console-output">> Ready</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+              <button class="btn btn-secondary" id="project-back-btn">Back to Projects</button>
+              <button class="btn btn-primary" id="project-submit-btn">Submit Completed Project 🚀</button>
+            </div>
+          </div>
+
+          <!-- Project mentor sidebar -->
+          <div class="dashboard-card" style="display: flex; flex-direction: column; max-height: 800px;">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-robot" style="color:var(--accent-violet)"></i> Project Mentor</h3>
+              <span class="teacher-status-dot"></span>
+            </div>
+            
+            <div class="chat-messages" id="project-mentor-messages" style="flex-grow: 1; min-height: 250px; font-size: 13px;">
+              <div class="message-bubble ai">
+                Hello! I am your PyNova AI Project Mentor. Select project tasks on the left, write your code, and let's work on completing them. Ask me for planning advice or hints anytime!
+              </div>
+            </div>
+
+            <div class="chat-input-area" style="padding: 12px 0 0 0;">
+              <input type="text" class="chat-input" id="project-mentor-input" placeholder="Ask your mentor for help on this project..." style="padding: 10px 14px;">
+              <button class="chat-send-btn" id="project-mentor-send" style="width: 38px; height: 38px; font-size: 14px;"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. LEADERBOARD VIEW -->
+      <section id="leaderboard-view" class="view-panel">
+        <h2 style="font-size: 28px; margin-bottom: 6px;">Global Rankings</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 30px;">Track your ranking among PyNova users. Practice regularly to stay at the top!</p>
+
+        <div class="dashboard-card" style="max-width: 800px; margin: 0 auto;">
+          <div class="card-header">
+            <h3 class="card-title">Weekly Leaderboard</h3>
+            <div style="display: flex; gap: 8px;">
+              <button class="filter-pill active" id="leaderboard-toggle" style="padding: 4px 10px; font-size: 11px;">Enabled</button>
+            </div>
+          </div>
+          
+          <div id="leaderboard-list-container">
+            <table class="leaderboard-table">
+              <thead>
+                <tr style="text-align: left; border-bottom: 2px solid var(--border-color); color: var(--text-muted); font-size: 13px;">
+                  <th class="leaderboard-cell rank">Rank</th>
+                  <th class="leaderboard-cell user">User</th>
+                  <th class="leaderboard-cell xp" style="text-align: right;">Total XP</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-table-rows">
+                <!-- Dynamically loaded -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. PROFILE VIEW -->
+      <section id="profile-view" class="view-panel">
+        <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; width: 100%;">
+          
+          <!-- Core profile description -->
+          <div class="dashboard-card" style="display: flex; align-items: center; gap: 30px; padding: 40px;">
+            <div class="avatar-circle" id="profile-avatar-large" style="width: 90px; height: 90px; font-size: 44px; cursor: pointer;" title="Click to change avatar">🤖</div>
+            <div style="flex-grow: 1;">
+              <h2 style="font-size: 28px; margin-bottom: 4px;" id="profile-username-large">NovaCoder</h2>
+              <div id="profile-level-badge" style="display: inline-block; background-color: var(--accent-violet-glow); border: 1px solid var(--border-active); color: var(--accent-violet); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 12px;">Level 1 Pythonist</div>
+              
+              <div style="display: flex; gap: 20px; font-size: 14px; color: var(--text-secondary);">
+                <span><strong id="profile-stat-lessons" style="color: var(--text-primary);">0</strong> Lessons</span>
+                <span><strong id="profile-stat-challenges" style="color: var(--text-primary);">0</strong> Puzzles</span>
+                <span><strong id="profile-stat-projects" style="color: var(--text-primary);">0</strong> Projects</span>
+              </div>
+            </div>
+            <button class="btn btn-secondary" id="profile-reset-state-btn" style="border-color: var(--accent-red); color: var(--accent-red); padding: 8px 16px; font-size: 13px;">Reset Progress</button>
+          </div>
+
+          <!-- Badges & Achievements -->
+          <div class="dashboard-card">
+            <h3 style="font-size: 18px; margin-bottom: 6px;">Unlocked Badges & Achievements</h3>
+            <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 16px;">Demonstrate your milestones. Collect them by completing tasks.</p>
+            
+            <div class="badges-grid" id="profile-badges-container">
+              <!-- Dynamically mapped badges from DB -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODALS PORTAL -->
+  
+  <!-- 1. SKILL ASSESSMENT MODAL -->
+  <div class="modal-overlay" id="assessment-modal">
+    <div class="modal-card">
+      <div class="modal-glow"></div>
+      <div class="modal-icon">🚀</div>
+      <h2 style="font-size: 22px; margin-bottom: 10px;">Personalize Your PyNova Journey</h2>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 24px;">Take this quick 3-question survey so Nova AI can optimize your roadmap and practice exercises.</p>
+      
+      <div id="assessment-question-container" style="text-align: left; margin-bottom: 24px;">
+        <!-- Dynamically populated question & answers options list -->
+      </div>
+      
+      <div style="display: flex; justify-content: flex-end;">
+        <button class="btn btn-primary" id="assessment-next-btn">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. LEVEL UP MODAL -->
+  <div class="modal-overlay" id="levelup-modal">
+    <div class="modal-card">
+      <div class="modal-glow" style="background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);"></div>
+      <div class="modal-icon">🏆</div>
+      <h2 style="font-size: 26px; margin-bottom: 6px; color: var(--accent-cyan);">Level Up!</h2>
+      <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 16px;" id="levelup-level-title">You reached Level 2</h3>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 24px;">Excellent progress. Your Python capabilities are expanding. New challenges are unlocked!</p>
+      <button class="btn btn-primary" id="levelup-close-btn" style="width: 100%;">Awesome!</button>
+    </div>
+  </div>
+
+  <!-- 3. BADGE EARNED MODAL -->
+  <div class="modal-overlay" id="badge-modal">
+    <div class="modal-card">
+      <div class="modal-glow"></div>
+      <div class="modal-icon" id="badge-earned-icon">🐍</div>
+      <h2 style="font-size: 24px; margin-bottom: 6px;" id="badge-earned-title">Python Beginner</h2>
+      <h4 style="font-size: 14px; font-weight: 500; color: var(--accent-violet); margin-bottom: 16px;">New Badge Earned!</h4>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 24px;" id="badge-earned-desc">Completed Level 1 Foundations node.</p>
+      <button class="btn btn-primary" id="badge-close-btn" style="width: 100%;">Equip Badge</button>
+    </div>
+  </div>
+
+  <!-- SPA Application controllers logic -->
+  <script src="js/database.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/debugger.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
