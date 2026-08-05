@@ -15,7 +15,7 @@ const ROADMAP = [
         explanation: "<h3>Welcome to Python!</h3><p>Python is a high-level, interpreted programming language known for its readability, simplicity, and versatility. Created by Guido van Rossum and released in 1991, Python is used for everything from web development and automation to data science, artificial intelligence, and scientific research.</p><h4>Key Features of Python:</h4><ul><li><strong>Readable Syntax:</strong> Feels like writing structured English.</li><li><strong>Interpreted:</strong> Code is executed line-by-line, making testing and debugging fast.</li><li><strong>Multi-paradigm:</strong> Supports procedural, functional, and object-oriented programming.</li></ul>",
         visualConcept: `<div class="visual-concept-card"><div class="visual-flow"><div class="flow-box py-code">code.py</div><div class="flow-arrow">➔</div><div class="flow-box py-engine">Python Interpreter</div><div class="flow-arrow">➔</div><div class="flow-box py-output">Screen Output</div></div></div>`,
         codeExample: `# This is your first Python program!
-print("Hello, PyNova Universe!")
+print("Hello, Python AI Universe!")
 # Run it to see the greeting!`,
         realWorldExample: "Google uses Python for web search systems, YouTube was largely built with it, and NASA uses it for scientific calculations. It powers the backends of modern platforms you use daily.",
         commonMistakes: [
@@ -29,9 +29,9 @@ print("Hello, PyNova Universe!")
           explanation: "Python does NOT require semicolons. It uses newlines to end statements, keeping code clean and readable."
         },
         practice: {
-          problem: "Write a program that uses print() to output 'PyNova is awesome!' to the console.",
+          problem: "Write a program that uses print() to output 'Python AI is awesome!' to the console.",
           starterCode: "# Write your code here\n",
-          expectedPattern: /print\s*\(\s*['"]PyNova is awesome!['"]\s*\)/
+          expectedPattern: /print\s*\(\s*['"]Python AI is awesome!['"]\s*\)/
         }
       },
       {
@@ -39,7 +39,7 @@ print("Hello, PyNova Universe!")
         title: "Installing Python & Setup",
         xpReward: 50,
         summary: "Learn how Python runs on your machine and setting up environments.",
-        explanation: "<h3>Setting up Python</h3><p>To run Python locally on your computer, you need the Python interpreter installed. You can download the latest version from python.org. Programmers typically write Python in Editors or Integrated Development Environments (IDEs) like VS Code, PyCharm, or right here inside PyNova AI!</p><h4>The Interactive REPL:</h4><p>Python offers a Read-Eval-Print Loop. Typing `python` in a terminal opens a shell where commands execute immediately.</p>",
+        explanation: "<h3>Setting up Python</h3><p>To run Python locally on your computer, you need the Python interpreter installed. You can download the latest version from python.org. Programmers typically write Python in Editors or Integrated Development Environments (IDEs) like VS Code, PyCharm, or right here inside Python AI!</p><h4>The Interactive REPL:</h4><p>Python offers a Read-Eval-Print Loop. Typing `python` in a terminal opens a shell where commands execute immediately.</p>",
         visualConcept: `<div class="visual-concept-card"><div class="terminal-mock"><span>$ python --version</span><br><span style="color: var(--accent-cyan)">Python 3.12.4</span></div></div>`,
         codeExample: `# Python has a built-in help function
 # run this to see details about print
@@ -157,7 +157,7 @@ print("Updated XP:", xp)`,
         summary: "Explore strings, integers, floats, and booleans.",
         explanation: "<h3>Python Data Types</h3><p>Every value in Python has a data type. Python detects this automatically. The key primitive data types are:</p><ul><li><strong>int:</strong> Integers (whole numbers), e.g., `42`, `-5`.</li><li><strong>float:</strong> Floating-point numbers (decimals), e.g., `3.14`, `-0.01`.</li><li><strong>str:</strong> String (text in quotes), e.g., `\"Python\"`.</li><li><strong>bool:</strong> Boolean (truth values), either `True` or `False`.</li></ul><p>Use `type(variable)` to check what data type Python has inferred.</p>",
         visualConcept: `<div class="visual-concept-card"><div class="type-table"><div><span>"Hello"</span> -> <strong style="color: var(--accent-violet)">str</strong></div><div><span>42</span> -> <strong style="color: var(--accent-violet)">int</strong></div><div><span>3.14</span> -> <strong style="color: var(--accent-violet)">float</strong></div><div><span>True</span> -> <strong style="color: var(--accent-violet)">bool</strong></div></div></div>`,
-        codeExample: `name = "Nova AI"
+        codeExample: `name = "Python AI"
 version = 2.0
 is_active = True
 lessons_count = 35

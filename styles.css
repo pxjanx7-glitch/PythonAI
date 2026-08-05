@@ -1,4 +1,4 @@
-/* PyNova AI - Global Stylesheet & Design System */
+/* Python AI - Global Stylesheet & Design System */
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
@@ -203,6 +203,21 @@ body.light-mode .logo-text {
   background: linear-gradient(to right, var(--text-primary), var(--text-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Sub-brand line shown under main logo when present */
+.sub-brand {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  line-height: 1;
+}
+
+/* Inline hint box helper styles */
+.inline-hint-box {
+  transition: opacity 240ms ease, transform 240ms ease;
 }
 
 .nav-menu {

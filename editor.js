@@ -20,7 +20,12 @@ class PyodideRunner {
 
     this.loading = true;
     try {
-      // Check if loadPyodide is available (CDN script loaded)
+      // Wait for loadPyodide to appear (CDN script is loaded asynchronously)
+      let waitCount = 0;
+      while (typeof loadPyodide === "undefined" && waitCount < 80) {
+        await new Promise(r => setTimeout(r, 100));
+        waitCount++;
+      }
       if (typeof loadPyodide === "undefined") {
         throw new Error("Pyodide CDN script not loaded. Check your internet connection.");
       }
@@ -29,20 +34,38 @@ class PyodideRunner {
         indexURL: "https://cdn.jsdelivr.net/pyodide/v0.27.7/full/"
       });
 
-      // Setup input() override and stdout capture helpers
-      await this.pyodide.runPythonAsync(`
-import sys, io
-from js import prompt as js_prompt
+      // Provide a JS-side inline input helper (pyodide_input) that Python can await via `from js import pyodide_input`.
+      // This shows a small input box inside the active console area instead of using window.prompt.
+      window.pyodide_input = function(promptText) {
+        return new Promise(resolve => {
+          try {
+            const consoleId = window.__pynova_active_console_id || 'sandbox-console-log';
+            const consoleEl = document.getElementById(consoleId) || document.body;
 
-def _custom_input(p=''):
-    result = js_prompt(str(p))
-    if result is None:
-        raise EOFError('Input cancelled by user')
-    return result
+            const wrapper = document.createElement('div');
+            wrapper.className = 'py-input-wrapper';
+            wrapper.style.marginTop = '8px';
+            wrapper.style.padding = '10px';
+            wrapper.style.borderRadius = '8px';
+            wrapper.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))';
+            wrapper.style.border = '1px solid rgba(255,255,255,0.04)';
 
-import builtins
-builtins.input = _custom_input
-`);
+            const safePrompt = String(promptText || '');
+            wrapper.innerHTML = `<div style="font-weight:600; color:var(--text-primary); margin-bottom:6px;">${safePrompt}</div><div style="display:flex; gap:8px;"><input class="py-input-field" style="flex:1; padding:8px; border-radius:6px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--text-primary)"></input><button class="py-input-submit btn" style="padding:8px 12px;">Submit</button><button class="py-input-cancel btn" style="padding:8px 12px;">Cancel</button></div>`;
+
+            consoleEl.appendChild(wrapper);
+            const inputField = wrapper.querySelector('.py-input-field');
+            inputField.focus();
+
+            const cleanup = (val) => { try { wrapper.remove(); } catch (e) {} ; resolve(val); };
+            wrapper.querySelector('.py-input-submit').addEventListener('click', () => cleanup(inputField.value));
+            wrapper.querySelector('.py-input-cancel').addEventListener('click', () => cleanup(''));
+            inputField.addEventListener('keydown', (e) => { if (e.key === 'Enter') { cleanup(inputField.value); } });
+          } catch (err) {
+            resolve('');
+          }
+        });
+      };
 
       this.loaded = true;
       this.loading = false;
@@ -70,7 +93,7 @@ builtins.input = _custom_input
     }
   }
 
-  async runCode(code) {
+  async runCode(code, consoleId) {
     const isFirstLoad = !this.loaded;
 
     const ok = await this.ensureLoaded();
@@ -83,6 +106,9 @@ builtins.input = _custom_input
       };
     }
 
+    // Set the active console id so inline input attaches to correct area
+    window.__pynova_active_console_id = consoleId || window.__pynova_active_console_id || 'sandbox-console-log';
+
     try {
       // Redirect stdout/stderr to a StringIO buffer
       await this.pyodide.runPythonAsync(`
@@ -93,9 +119,18 @@ sys.stdout = _stdout_buffer
 sys.stderr = _stderr_buffer
 `);
 
+      // If user code uses input(), transform into an async wrapper that awaits the JS helper
+      let execCode = code;
+      const usesInput = /\binput\s*\(/.test(code);
+      if (usesInput) {
+        const replaced = code.replace(/\binput\s*\(/g, 'await pyodide_input(');
+        const indented = replaced.split('\n').map(line => '    ' + line).join('\n');
+        execCode = `from js import pyodide_input\nimport asyncio\nasync def __pynova_main():\n${indented}\nasyncio.run(__pynova_main())`;
+      }
+
       // Execute user code with a timeout
       const timeoutMs = 10000;
-      const execPromise = this.pyodide.runPythonAsync(code);
+      const execPromise = this.pyodide.runPythonAsync(execCode);
 
       const result = await Promise.race([
         execPromise,
@@ -337,7 +372,7 @@ print(f"Hello, {name}! Welcome aboard.")
       window.PyNovaState.awardBadge("badge_code");
     }
 
-    const result = await pyodideRunner.runCode(code);
+    const result = await pyodideRunner.runCode(code, 'sandbox-console-log');
 
     this.sandboxRunBtn.disabled = false;
     this.sandboxRunBtn.innerHTML = `<i class="fa-solid fa-play"></i> Run Code`;
@@ -368,7 +403,7 @@ print(f"Hello, {name}! Welcome aboard.")
       this.lessonConsole.innerText = "> Running code challenge check...";
     }
 
-    const result = await pyodideRunner.runCode(code);
+    const result = await pyodideRunner.runCode(code, 'lesson-console-output');
 
     if (result.success) {
       this.lessonConsole.classList.remove("error");
@@ -396,7 +431,7 @@ print(f"Hello, {name}! Welcome aboard.")
       this.projectConsole.innerText = "> Compiling project execution script...";
     }
 
-    const result = await pyodideRunner.runCode(code);
+    const result = await pyodideRunner.runCode(code, 'project-console-output');
 
     if (result.success) {
       this.projectConsole.classList.remove("error");

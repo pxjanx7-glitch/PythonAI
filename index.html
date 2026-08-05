@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PyNova AI — Premium Python Learning Universe</title>
+  <title>Python AI — Premium Python Learning Universe</title>
   <!-- Google Fonts & FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -18,7 +18,7 @@
     <aside class="sidebar" id="app-sidebar">
       <div class="logo-container">
         <div class="logo-icon">P</div>
-        <div class="logo-text">PyNova AI</div>
+        <div class="logo-text">Python AI<br><span class="sub-brand">by Prabhanjan.A</span></div>
       </div>
       
       <nav class="nav-menu">
@@ -86,7 +86,9 @@
           <i class="fa-solid fa-bars"></i>
         </button>
         
-        <h2>PyNova Dashboard</h2>
+        <h2>Python AI<br><span class="sub-brand">by Prabhanjan.A</span></h2>
+
+        <div id="pyodide-status" style="margin-left:16px; font-size:13px; color:var(--text-secondary);">Runtime: Not loaded</div>
 
         <div class="header-stats">
           <div class="stat-pill xp" title="Total Experience Points">
@@ -254,7 +256,7 @@
             <div class="chat-header-bar">
               <div class="avatar-circle" style="width: 38px; height: 38px; font-size: 18px;">🤖</div>
               <div style="flex-grow: 1;">
-                <h4 style="font-size: 15px;">Nova AI Teacher</h4>
+                <h4 style="font-size: 15px;">Python AI Teacher</h4>
                 <span style="font-size: 11px; color: var(--text-secondary); display: flex; align-items: center; gap: 4px;">
                   <span class="teacher-status-dot"></span> Active Assistant
                 </span>
@@ -279,7 +281,7 @@
             <!-- Keyboard text submissions -->
             <div class="chat-input-area">
               <div class="chat-input-wrapper">
-                <input type="text" class="chat-input" id="chat-input-box" placeholder="Ask Nova AI anything about Python...">
+                <input type="text" class="chat-input" id="chat-input-box" placeholder="Ask Python AI anything about Python...">
               </div>
               <button class="chat-send-btn" id="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
@@ -339,7 +341,7 @@
 
               <!-- AI Suggestion error log -->
               <div class="ai-suggestion-box" id="lesson-error-suggestion">
-                <div class="ai-suggestion-title"><i class="fa-solid fa-sparkles"></i> Nova AI Code Coach</div>
+                <div class="ai-suggestion-title"><i class="fa-solid fa-sparkles"></i> Python AI Code Coach</div>
                 <div id="lesson-error-suggestion-text" style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;"></div>
               </div>
             </div>
@@ -352,7 +354,7 @@
         <h2 style="font-size: 24px; margin-bottom: 8px;">Python Code Sandbox</h2>
         <p style="color: var(--text-secondary); margin-bottom: 20px;">A full interactive sandbox to experiment, code, test syntax, and use AI features.</p>
         
-        <div style="display: grid; grid-template-columns: 3fr 1.2fr; gap: 24px; flex-grow: 1; height: 80%;">
+        <div style="display: grid; grid-template-columns: 1fr; gap: 24px; flex-grow: 1; height: 80%;">
           <!-- Code editor area -->
           <div class="editor-card">
             <div class="editor-header">
@@ -363,15 +365,13 @@
                 <button class="editor-btn run" id="sandbox-run-btn"><i class="fa-solid fa-play"></i> Run Code</button>
               </div>
             </div>
-            <div class="editor-body">
+              <div class="editor-body">
               <div class="line-numbers" id="sandbox-line-numbers">1</div>
-              <textarea class="code-textarea" id="sandbox-code-editor" spellcheck="false"># Dynamic Python Playground
-print("Welcome to PyNova Live Editor!")
+              <textarea class="code-textarea" id="sandbox-code-editor" spellcheck="false"># Python AI Playground
+print("Welcome to Python AI Live Editor!")
 
-# Assign variables
-name = "Galaxy Explorer"
-version = 2.0
-print(f"Project: {name} v{version}")
+name = input("What is your name? ")
+print("Hello", name)
 </textarea>
             </div>
             <div class="editor-footer-panels">
@@ -382,29 +382,6 @@ print(f"Project: {name} v{version}")
             </div>
           </div>
 
-          <!-- AI Tools pane -->
-          <div style="display: flex; flex-direction: column; gap: 20px;">
-            <div class="dashboard-card" style="flex-grow: 1; display: flex; flex-direction: column; gap: 12px; padding: 20px;">
-              <h3 style="font-size: 16px; margin-bottom: 8px;"><i class="fa-solid fa-sparkles" style="color:var(--accent-cyan)"></i> Nova AI Editor Assistant</h3>
-              
-              <button class="btn btn-secondary" id="ai-tool-explain" style="justify-content: flex-start; text-align: left; font-size: 13px; padding: 12px;">
-                <i class="fa-solid fa-book-open"></i> Explain Code
-              </button>
-              <button class="btn btn-secondary" id="ai-tool-debug" style="justify-content: flex-start; text-align: left; font-size: 13px; padding: 12px;">
-                <i class="fa-solid fa-bug"></i> Debug Code
-              </button>
-              <button class="btn btn-secondary" id="ai-tool-optimize" style="justify-content: flex-start; text-align: left; font-size: 13px; padding: 12px;">
-                <i class="fa-solid fa-gauge-high"></i> Optimize Code
-              </button>
-              <button class="btn btn-secondary" id="ai-tool-tests" style="justify-content: flex-start; text-align: left; font-size: 13px; padding: 12px;">
-                <i class="fa-solid fa-vial"></i> Generate Test Cases
-              </button>
-
-              <div id="editor-ai-explanation-drawer" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 12px; font-size: 13px; color: var(--text-secondary); overflow-y: auto; max-height: 250px; line-height: 1.5;">
-                Select a tool above to analyze your sandbox code. Nova AI will print code walkthroughs and debugging analysis here.
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -478,7 +455,7 @@ print(total)"></textarea>
               
               <div id="debugger-report-container" style="font-size: 14px; color: var(--text-secondary); line-height: 1.5; display: flex; flex-direction: column; gap: 12px;">
                 <p>Paste your Python snippet in the editor and click "Analyze Code".</p>
-                <p>Nova AI will scanning for syntax errors, logical gaps, division exceptions, and visualizes executions details.</p>
+                <p>Python AI will scan for syntax errors, logical gaps, division exceptions, and visualize execution details.</p>
               </div>
             </div>
           </div>
@@ -561,7 +538,7 @@ print(total)"></textarea>
             
             <div class="chat-messages" id="project-mentor-messages" style="flex-grow: 1; min-height: 250px; font-size: 13px;">
               <div class="message-bubble ai">
-                Hello! I am your PyNova AI Project Mentor. Select project tasks on the left, write your code, and let's work on completing them. Ask me for planning advice or hints anytime!
+                Hello! I am your Python AI Project Mentor. Select project tasks on the left, write your code, and let's work on completing them. Ask me for planning advice or hints anytime!
               </div>
             </div>
 
@@ -576,7 +553,7 @@ print(total)"></textarea>
       <!-- 10. LEADERBOARD VIEW -->
       <section id="leaderboard-view" class="view-panel">
         <h2 style="font-size: 28px; margin-bottom: 6px;">Global Rankings</h2>
-        <p style="color: var(--text-secondary); margin-bottom: 30px;">Track your ranking among PyNova users. Practice regularly to stay at the top!</p>
+        <p style="color: var(--text-secondary); margin-bottom: 30px;">Track your ranking among Python AI users. Practice regularly to stay at the top!</p>
 
         <div class="dashboard-card" style="max-width: 800px; margin: 0 auto;">
           <div class="card-header">
@@ -645,8 +622,8 @@ print(total)"></textarea>
     <div class="modal-card">
       <div class="modal-glow"></div>
       <div class="modal-icon">🚀</div>
-      <h2 style="font-size: 22px; margin-bottom: 10px;">Personalize Your PyNova Journey</h2>
-      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 24px;">Take this quick 3-question survey so Nova AI can optimize your roadmap and practice exercises.</p>
+      <h2 style="font-size: 22px; margin-bottom: 10px;">Personalize Your Python AI Journey</h2>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 24px;">Take this quick 3-question survey so Python AI can optimize your roadmap and practice exercises.</p>
       
       <div id="assessment-question-container" style="text-align: left; margin-bottom: 24px;">
         <!-- Dynamically populated question & answers options list -->
@@ -686,6 +663,17 @@ print(total)"></textarea>
   <script src="js/database.js"></script>
   <script src="js/state.js"></script>
   <script src="js/ai.js"></script>
+  <!-- Load Pyodide runtime asynchronously (used by Editor) -->
+  <script>
+    (function(){
+      const s = document.createElement('script');
+      s.src = "https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js";
+      s.defer = true;
+      s.onload = function(){ console.log('Pyodide script loaded'); };
+      s.onerror = function(){ console.warn('Failed to load Pyodide runtime'); };
+      document.head.appendChild(s);
+    })();
+  </script>
   <script src="js/editor.js"></script>
   <script src="js/debugger.js"></script>
   <script src="js/app.js"></script>
