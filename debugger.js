@@ -261,6 +261,64 @@ class DebuggerController {
       currentIndent = indent;
     }
 
+    // Rule 4: Check for undefined variables (NameError)
+    let definedVars = new Set();
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      
+      // Track assignments (var = ...)
+      const assignMatch = line.match(/^(\w+)\s*=/);
+      if (assignMatch) {
+        definedVars.add(assignMatch[1]);
+      }
+      
+      // Track for loop variables (for var in ...)
+      const forMatch = line.match(/^for\s+(\w+)\s+in\s+/);
+      if (forMatch) {
+        definedVars.add(forMatch[1]);
+      }
+      
+      // Track function definitions (def funcname(...):)
+      const defMatch = line.match(/^def\s+(\w+)\s*\(/);
+      if (defMatch) {
+        definedVars.add(defMatch[1]);
+      }
+    }
+    
+    // Now check if used variables are defined
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      
+      // Skip assignment lines and comments
+      if (line.includes("=") && !line.startsWith("if ") && !line.startsWith("elif ")) continue;
+      if (line.startsWith("#")) continue;
+      
+      // Extract variable names used in print(), len(), type(), etc.
+      const funcCalls = line.match(/\b(print|len|type|str|int|float|sum|abs|max|min)\s*\(([^)]*)\)/g);
+      if (funcCalls) {
+        for (let funcCall of funcCalls) {
+          const argsMatch = funcCall.match(/\(([^)]*)\)/);
+          if (argsMatch) {
+            const args = argsMatch[1];
+            // Extract variable names (alphanumeric + underscore)
+            const varMatches = args.match(/\b([a-zA-Z_]\w*)\b/g);
+            if (varMatches) {
+              for (let varName of varMatches) {
+                if (!definedVars.has(varName) && !["True", "False", "None"].includes(varName)) {
+                  issues.hasError = true;
+                  issues.title = "Undefined Variable (NameError)";
+                  issues.why = `Line ${i + 1} uses variable "${varName}" but it was never defined. Did you mean one of these? ${Array.from(definedVars).join(", ") || "No variables defined yet."}`;
+                  issues.how = `Define the variable before using it, or check the spelling. Available variables: ${Array.from(definedVars).join(", ") || "None"}`;
+                  issues.errorLines.push(i + 1);
+                  return issues;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
     return issues;
   }
 
