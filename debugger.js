@@ -118,24 +118,48 @@ class DebuggerController {
       errorLines: []
     };
 
-    // Rule 0: Check for unclosed brackets/parentheses
+    // Rule 0: Check for unclosed brackets/parentheses (skip string literals)
     let parenCount = 0, bracketCount = 0, braceCount = 0;
+    let inSingleQuote = false, inDoubleQuote = false;
+    let escapeNext = false;
+    
     for (let i = 0; i < code.length; i++) {
       const char = code[i];
-      if (char === "(") parenCount++;
-      if (char === ")") parenCount--;
-      if (char === "[") bracketCount++;
-      if (char === "]") bracketCount--;
-      if (char === "{") braceCount++;
-      if (char === "}") braceCount--;
       
-      if (parenCount < 0 || bracketCount < 0 || braceCount < 0) {
-        issues.hasError = true;
-        issues.title = "Unmatched Closing Bracket (SyntaxError)";
-        issues.why = `The code contains a closing bracket without a matching opening bracket.`;
-        issues.how = "Check that all opening brackets '(', '[', '{' have corresponding closing brackets.";
-        issues.errorLines.push(code.substring(0, i).split("\n").length);
-        return issues;
+      // Handle escape sequences
+      if (escapeNext) {
+        escapeNext = false;
+        continue;
+      }
+      if (char === "\\") {
+        escapeNext = true;
+        continue;
+      }
+      
+      // Track if we're inside a string
+      if (char === '"' && !inSingleQuote) {
+        inDoubleQuote = !inDoubleQuote;
+      } else if (char === "'" && !inDoubleQuote) {
+        inSingleQuote = !inSingleQuote;
+      }
+      
+      // Only count brackets outside of strings
+      if (!inSingleQuote && !inDoubleQuote) {
+        if (char === "(") parenCount++;
+        if (char === ")") parenCount--;
+        if (char === "[") bracketCount++;
+        if (char === "]") bracketCount--;
+        if (char === "{") braceCount++;
+        if (char === "}") braceCount--;
+        
+        if (parenCount < 0 || bracketCount < 0 || braceCount < 0) {
+          issues.hasError = true;
+          issues.title = "Unmatched Closing Bracket (SyntaxError)";
+          issues.why = `The code contains a closing bracket without a matching opening bracket.`;
+          issues.how = "Check that all opening brackets '(', '[', '{' have corresponding closing brackets.";
+          issues.errorLines.push(code.substring(0, i).split("\n").length);
+          return issues;
+        }
       }
     }
     
