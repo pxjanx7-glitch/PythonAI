@@ -168,6 +168,10 @@ class DebuggerController {
       issues.title = "Unclosed Parenthesis (SyntaxError)";
       issues.why = `Missing ${parenCount} closing parenthesis/parentheses ')'. All function calls and expressions must have matching brackets.`;
       issues.how = "Check that every opening '(' has a corresponding closing ')'.";
+      // Auto-correct: append missing closing parentheses
+      if (parenCount > 0) {
+        issues.corrected = code + ")".repeat(parenCount);
+      }
       return issues;
     }
     if (bracketCount !== 0) {
@@ -175,6 +179,10 @@ class DebuggerController {
       issues.title = "Unclosed Bracket (SyntaxError)";
       issues.why = `Missing ${bracketCount} closing bracket/brackets ']'. All list/array accesses must have matching brackets.`;
       issues.how = "Check that every opening '[' has a corresponding closing ']'.";
+      // Auto-correct: append missing closing brackets
+      if (bracketCount > 0) {
+        issues.corrected = code + "]".repeat(bracketCount);
+      }
       return issues;
     }
     if (braceCount !== 0) {
@@ -182,6 +190,10 @@ class DebuggerController {
       issues.title = "Unclosed Brace (SyntaxError)";
       issues.why = `Missing ${braceCount} closing brace/braces '}'. All dictionaries/sets must have matching braces.`;
       issues.how = "Check that every opening '{' has a corresponding closing '}'.";
+      // Auto-correct: append missing closing braces
+      if (braceCount > 0) {
+        issues.corrected = code + "}".repeat(braceCount);
+      }
       return issues;
     }
 
