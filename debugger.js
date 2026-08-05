@@ -118,6 +118,49 @@ class DebuggerController {
       errorLines: []
     };
 
+    // Rule 0: Check for unclosed brackets/parentheses
+    let parenCount = 0, bracketCount = 0, braceCount = 0;
+    for (let i = 0; i < code.length; i++) {
+      const char = code[i];
+      if (char === "(") parenCount++;
+      if (char === ")") parenCount--;
+      if (char === "[") bracketCount++;
+      if (char === "]") bracketCount--;
+      if (char === "{") braceCount++;
+      if (char === "}") braceCount--;
+      
+      if (parenCount < 0 || bracketCount < 0 || braceCount < 0) {
+        issues.hasError = true;
+        issues.title = "Unmatched Closing Bracket (SyntaxError)";
+        issues.why = `The code contains a closing bracket without a matching opening bracket.`;
+        issues.how = "Check that all opening brackets '(', '[', '{' have corresponding closing brackets.";
+        issues.errorLines.push(code.substring(0, i).split("\n").length);
+        return issues;
+      }
+    }
+    
+    if (parenCount !== 0) {
+      issues.hasError = true;
+      issues.title = "Unclosed Parenthesis (SyntaxError)";
+      issues.why = `Missing ${parenCount} closing parenthesis/parentheses ')'. All function calls and expressions must have matching brackets.`;
+      issues.how = "Check that every opening '(' has a corresponding closing ')'.";
+      return issues;
+    }
+    if (bracketCount !== 0) {
+      issues.hasError = true;
+      issues.title = "Unclosed Bracket (SyntaxError)";
+      issues.why = `Missing ${bracketCount} closing bracket/brackets ']'. All list/array accesses must have matching brackets.`;
+      issues.how = "Check that every opening '[' has a corresponding closing ']'.";
+      return issues;
+    }
+    if (braceCount !== 0) {
+      issues.hasError = true;
+      issues.title = "Unclosed Brace (SyntaxError)";
+      issues.why = `Missing ${braceCount} closing brace/braces '}'. All dictionaries/sets must have matching braces.`;
+      issues.how = "Check that every opening '{' has a corresponding closing '}'.";
+      return issues;
+    }
+
     // Rule 1: check for missing colon after if/else/for/while/def
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
