@@ -1,4 +1,4 @@
-// PyNova AI - Dynamic Teacher & Mentor Response Generator
+// Python AI - Dynamic Teacher & Mentor Response Generator
 
 class AiTeacher {
   constructor() {
@@ -104,7 +104,7 @@ else:
 age = 20
 has_ticket = True
 if age >= 18 and has_ticket:
-    print("Welcome to PyNova Cinema!")
+    print("Welcome to Python AI Cinema!")
 else:
     print("Access Denied.")`,
         beginner: "Imagine a flowchart or fork in the road. You ask a question: 'Do I have keys?' If Yes, open the door. If No, check the window (elif). If all else fails, wait outside (else)!",
@@ -244,7 +244,7 @@ print(square(4))    # Outputs 16`,
         </ul>`,
         example: `# Writing and Reading a file
 with open("notes.txt", "w") as file:
-    file.write("PyNova AI platform is active.")
+    file.write("Python AI platform is active.")
 
 with open("notes.txt", "r") as file:
     content = file.read()
@@ -369,7 +369,7 @@ print(my_dog.speak()) # Outputs "Woof!"`,
     // 1. Handle Greetings
     if (this.isGreeting(prompt)) {
       return `<h3>Hello! 🤖</h3>
-      <p>I am your **PyNova AI Teacher**. I'm ready to explain Python concepts simply, review your code, and recommend what to learn next.</p>
+      <p>I am your **Python AI Teacher**. I'm ready to explain Python concepts simply, review your code, and recommend what to learn next.</p>
       <p>Which topic are we exploring today? You can ask me about details like <strong>Loops</strong>, <strong>Lists</strong>, <strong>Dictionaries</strong>, or <strong>OOP</strong>! Let me know.</p>`;
     }
 
@@ -424,7 +424,7 @@ print(my_dog.speak()) # Outputs "Woof!"`,
       Ask me about any specific keyword in this code (like <strong>f-string</strong>, <strong>variables</strong>, or <strong>operators</strong>) to dive deeper!`;
     }
     if (prompt.includes("hint")) {
-      return `💡 **Nova AI Hint:** Break down your learning targets. Follow the active node on the **Roadmap** dashboard. If you're writing code, test variables one by one using <code>print()</code>.`;
+      return `💡 **Python AI Hint:** Break down your learning targets. Follow the active node on the **Roadmap** dashboard. If you're writing code, test variables one by one using <code>print()</code>.`;
     }
     if (prompt.includes("quiz me")) {
       return `Sure! Let's check variables knowledge. What is the output of this Python command?
@@ -449,7 +449,7 @@ print(my_dog.speak()) # Outputs "Woof!"`,
   }
 
   formatTopicResponse(topic, modifier) {
-    let resp = `<h3>Nova AI Teacher: ${topic.title}</h3>`;
+    let resp = `<h3>Python AI Teacher: ${topic.title}</h3>`;
     
     // Inject beginner explanation
     if (modifier === "beginner") {
@@ -506,7 +506,7 @@ print(my_dog.speak()) # Outputs "Woof!"`,
 
   getProjectMentorResponse(projectId, taskText, userCode) {
     return `
-      <h4>Nova AI Project Mentor</h4>
+      <h4>Python AI Project Mentor</h4>
       <p>I reviewed your progress on task: <strong>"${taskText}"</strong>.</p>
       <p>Your workspace contains some code structure. To complete this task successfully:</p>
       <ul>

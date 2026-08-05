@@ -28,9 +28,9 @@ const DEFAULT_STATE = {
   chatHistory: [
     {
       id: "chat_welcome",
-      title: "Welcome to PyNova",
+      title: "Welcome to Python AI",
       messages: [
-        { sender: "ai", text: "Hello! I am your PyNova AI Teacher. Let's learn Python together. How can I help you today?", date: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }
+        { sender: "ai", text: "Hello! I am your Python AI Teacher. Let's learn Python together. How can I help you today?", date: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }
       ]
     }
   ],
@@ -67,7 +67,7 @@ class StateManager {
     } else {
       this.state = JSON.parse(JSON.stringify(DEFAULT_STATE));
       // Pre-add a welcome activity
-      this.addActivity("Account Created", "Welcome to PyNova AI!");
+      this.addActivity("Account Created", "Welcome to Python AI!");
     }
     this.updateStreak();
     this.save();

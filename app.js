@@ -106,11 +106,15 @@ class AppController {
       });
     });
 
-    // Debug analysis button hooks
-    document.getElementById("ai-tool-explain").addEventListener("click", () => this.runSandboxAiTool("explain"));
-    document.getElementById("ai-tool-debug").addEventListener("click", () => this.runSandboxAiTool("debug"));
-    document.getElementById("ai-tool-optimize").addEventListener("click", () => this.runSandboxAiTool("optimize"));
-    document.getElementById("ai-tool-tests").addEventListener("click", () => this.runSandboxAiTool("tests"));
+    // Debug analysis button hooks (only if AI Editor Assistant panel is present)
+    const aiExplainBtn = document.getElementById("ai-tool-explain");
+    if (aiExplainBtn) aiExplainBtn.addEventListener("click", () => this.runSandboxAiTool("explain"));
+    const aiDebugBtn = document.getElementById("ai-tool-debug");
+    if (aiDebugBtn) aiDebugBtn.addEventListener("click", () => this.runSandboxAiTool("debug"));
+    const aiOptimizeBtn = document.getElementById("ai-tool-optimize");
+    if (aiOptimizeBtn) aiOptimizeBtn.addEventListener("click", () => this.runSandboxAiTool("optimize"));
+    const aiTestsBtn = document.getElementById("ai-tool-tests");
+    if (aiTestsBtn) aiTestsBtn.addEventListener("click", () => this.runSandboxAiTool("tests"));
 
     // Project workspace elements
     document.getElementById("project-back-btn").addEventListener("click", () => {
@@ -190,7 +194,7 @@ class AppController {
 
     // 4. Update Header Title
     const viewName = viewId.replace("-view", "").replace(/^\w/, c => c.toUpperCase());
-    this.hdrTitle.innerText = `PyNova ${viewName === 'Dashboard' ? 'Core' : viewName}`;
+    this.hdrTitle.innerText = `Python AI ${viewName === 'Dashboard' ? 'Core' : viewName}`;
 
     // Reload stats updates
     this.loadStateAndStats();
@@ -268,7 +272,7 @@ class AppController {
       <div class="lesson-node-icon"><i class="fa-solid fa-sparkles"></i></div>
       <div class="continue-details">
         <h4 class="continue-title">Study Target: ${this.formatId(nextNode)}</h4>
-        <div class="continue-desc">Nova AI recommends focusing on this foundations concept.</div>
+        <div class="continue-desc">Python AI recommends focusing on this foundations concept.</div>
       </div>
       <button class="btn btn-primary" style="padding: 8px 16px;">Study</button>
     `;
@@ -728,7 +732,7 @@ class AppController {
     const container = document.getElementById("chat-messages-container");
     const indicator = document.createElement("div");
     indicator.className = "message-bubble ai";
-    indicator.innerHTML = `<span style="color:var(--text-muted)"><i class="fa-solid fa-spinner fa-spin"></i> Nova AI is typing...</span>`;
+    indicator.innerHTML = `<span style="color:var(--text-muted)"><i class="fa-solid fa-spinner fa-spin"></i> Python AI is typing...</span>`;
     container.appendChild(indicator);
     container.scrollTop = container.scrollHeight;
 
@@ -955,7 +959,37 @@ class AppController {
     `;
 
     document.getElementById("quiz-hint-btn").onclick = () => {
-      alert("💡 Hint: Check standard variable capitalization and logical syntax block structures.");
+      const area = document.querySelector(".quiz-active-area");
+      if (!area) return;
+      let hintBox = area.querySelector("#quiz-hint-box");
+      const btn = document.getElementById("quiz-hint-btn");
+      const hintText = "Check standard variable capitalization and logical syntax block structures.";
+      if (!hintBox) {
+        hintBox = document.createElement("div");
+        hintBox.id = "quiz-hint-box";
+        hintBox.style.display = "none";
+        hintBox.innerHTML = `
+          <div class="inline-hint-box" style="margin-top:12px; padding:12px; border-radius:10px; background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04); backdrop-filter: blur(6px);">
+            <div style="font-weight:600; display:flex; gap:8px; align-items:center;">💡 Hint</div>
+            <div style="margin-top:6px; color:var(--text-secondary);">${hintText}</div>
+          </div>
+        `;
+        area.appendChild(hintBox);
+        // animate in
+        requestAnimationFrame(()=>{ hintBox.style.opacity = 0; hintBox.style.transform = 'translateY(-6px)'; hintBox.style.display = 'block';
+          setTimeout(()=>{ hintBox.style.transition='opacity 240ms ease, transform 240ms ease'; hintBox.style.opacity=1; hintBox.style.transform='translateY(0)'; },10);
+        });
+        btn.innerHTML = '<i class="fa-solid fa-lightbulb"></i> Hide Hint';
+      } else {
+        const visible = hintBox.style.display !== 'none';
+        if (visible) {
+          hintBox.style.display = 'none';
+          btn.innerHTML = '<i class="fa-solid fa-lightbulb"></i> Get Hint';
+        } else {
+          hintBox.style.display = 'block';
+          btn.innerHTML = '<i class="fa-solid fa-lightbulb"></i> Hide Hint';
+        }
+      }
     };
 
     document.getElementById("quiz-next-btn").onclick = () => this.handleQuizNext();
